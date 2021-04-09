@@ -15,14 +15,47 @@
  * ]
  *
  * The result should be following:
- * [
+* [
  *  [1, 2, 1],
  *  [2, 1, 1],
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const result = [];
+  for (let i = 0; i < matrix.length; i++) {
+    const innerArray = [];
+    for (let j = 0; j < matrix[i].length; j++) {
+      let count = 0;
+      if ((i < matrix.length - 1 && matrix[i + 1][j] === true)) {
+        count++;
+      }
+      if (j < matrix[i].length - 1 && matrix[i][j + 1] === true) {
+        count++;
+      }
+      if (i < matrix.length - 1 && j < matrix[i].length - 1 && matrix[i + 1][j + 1] === true) {
+        count++;
+      }
+      if (j > 0 && matrix[i][j - 1] === true) {
+        count++;
+      }
+      if (i > 0 && matrix[i - 1][j] === true) {
+        count++;
+      }
+      if (i < matrix.length - 1 && j > 0 && matrix[i + 1][j - 1] === true) {
+        count++;
+      }
+      if (i > 0 && j < matrix[i].length - 1 && matrix[i - 1][j + 1] === true) {
+        count++;
+      }
+      if (i > 0 && j > 0 && matrix[i - 1][j - 1] === true) {
+        count++;
+      }
+      innerArray.push(count);
+    }
+    result.push(innerArray);
+  }
+  return result;
 }
 
 module.exports = minesweeper;
