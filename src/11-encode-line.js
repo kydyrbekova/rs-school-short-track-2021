@@ -25,5 +25,4 @@ function encodeLine(str) {
   }
   return result.join('');
 }
-
 module.exports = encodeLine;
