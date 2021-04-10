@@ -21,13 +21,24 @@
  *
  */
 function getDNSStats(domains) {
-  const array = [];
-  const obj = {};
-  for (let i = 0; i < domains.length; i++) {
-    array.push(domains[i].split('.'));
+  if (domains.length === 0) {
+    return {};
   }
-  console.log(array);
-  return obj;
+  const result = {};
+  for (let i = 0; i < domains.length; i++) {
+    const currentDom = domains[i];
+    const reverseDomains = currentDom.split('.').reverse();
+    let temp = '';
+    for (let j = 0; j < reverseDomains.length; j++) {
+      temp += `.${reverseDomains[j]}`;
+      if (!result[temp]) {
+        result[temp] = 1;
+      } else {
+        result[temp]++;
+      }
+    }
+  }
+  return result;
 }
 
 module.exports = getDNSStats;
